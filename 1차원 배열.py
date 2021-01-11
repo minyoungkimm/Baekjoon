@@ -25,6 +25,17 @@ for x in range(10):
     x=str(x)
     print(result.count(x))
 
+# 3번 ver.2
+num=int(input())
+num*=int(input())
+num*=int(input())
+
+idx=[0 for _ in range(10)]
+for s in str(num):
+    idx[int(s)]+=1
+print(idx,sep='\n')
+
+
 # 4번
 remain_list=[]
 for x in range(10):
