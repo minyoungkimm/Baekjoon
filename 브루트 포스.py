@@ -62,3 +62,62 @@ while True:
 
 print(m)
 
+
+# 덩치
+N = int(input())
+n_list=[]
+for _ in range(N):
+    n_list.append(input().split())
+
+for i in range(N):
+    rank = 1
+    for j in range(N):
+        if n_list[i][0] < n_list[j][0] and n_list[i][1] < n_list[j][1]:
+            rank += 1
+    print(rank,end=' ')
+
+
+# 체스판 다시 칠하기
+M,N = map(int,input().split())
+
+c_list=[]
+for _ in range(M):
+    c_list.append(input())
+
+rep_list=[]
+for i in range(M-7):
+    for j in range(N-7):
+        w=0
+        b=0
+        for k in range(i,i+8):
+            for p in range(j,j+8):
+                if (k+p) % 2 == 0:
+                    if c_list[k][p] != 'W':
+                        w += 1
+                    if c_list[k][p] != 'B':
+                        b += 1
+                else:
+                    if c_list[k][p] != 'B':
+                        w += 1
+                    if c_list[k][p] != 'W':
+                        b += 1
+        rep_list.append(w)
+        rep_list.append(b)
+
+print(min(rep_list))
+
+
+# 영화감독 숌
+N=int(input())
+
+cnt=0
+x=666
+while True:
+    if '666' in str(x):
+        cnt+=1
+    if cnt == N:
+        print(x)
+        break
+
+    x += 1
+
