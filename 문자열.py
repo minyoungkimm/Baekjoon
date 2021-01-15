@@ -28,10 +28,13 @@ for i in range(int(input())):
     n = int(n)
     print(''.join(j*n for j in word))
 
+
+
 # 단어 공부
 word = input().upper()
 word_dup=list(set(word))
 max=0
+result=' '
 for x in word_dup:
     count = word.count(x)
     if max == count:
@@ -41,6 +44,33 @@ for x in word_dup:
         result=x
 
 print(result)
+
+# 단어 공부 ver.2
+S=input().upper()
+alpha=[0 for _ in range(26)]
+
+for s in S:
+    alpha[ord(s)-ord('A')] += 1
+
+max_cnt=max(alpha)
+M=0
+for i,cnt in enumerate(alpha):
+    if max_cnt == cnt:
+        M += 1
+        max_alpha=chr(i+65)
+
+if M >= 2:
+    print('?')
+else:
+    print(max_alpha)
+
+# 단어 공부 ver.3
+S=input().upper()
+alpha=[]
+for i in range(65,91):
+    alpha.append(S.count(chr(i)))
+print('?' if alpha.count(max(alpha)) > 1 else chr(alpha.index(max(alpha))+65))
+
 
 # 단어의 개수
 # text = input().strip()
@@ -117,6 +147,7 @@ for _ in range(N):
 
 print(result)
 
+
 # 그룹 단어 체커 ver.2
 N=int(input())
 for i in range(N):
@@ -125,4 +156,25 @@ for i in range(N):
         if word.find(word[j-1]) > word.find(word[j]):
             N -= 1
             break
+print(N)
+
+# 그룹 단어 체커 ver.3
+N = int(input())
+result=N
+for _ in range(N):
+    word = input()
+    al_set=set()
+    al_set.add(word[0])
+    s=word[0]
+    for w in word:
+        if s == w:
+            continue
+        else:
+            if w in al_set:
+                N -= 1
+                break
+            else:
+                al_set.add(w)
+                s=w
+
 print(N)

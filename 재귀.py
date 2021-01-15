@@ -50,7 +50,7 @@ n=int(input())
 l=['***','* *','***']
 e=0
 while n!=3:
-    n=int(n/3)
+    n=n//3
     e+=1
 
 for _ in range(e):

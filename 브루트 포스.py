@@ -107,6 +107,7 @@ for i in range(M-7):
 print(min(rep_list))
 
 
+
 # 영화감독 숌
 N=int(input())
 
