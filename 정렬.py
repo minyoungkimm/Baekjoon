@@ -41,40 +41,40 @@
 
 
 
-# 통계학
-from collections import Counter
-import sys
-
-N = int(input())
-num = [int(sys.stdin.readline()) for _ in range(N)]
-
-### 평균
-print(round(sum(num)/len(num)))
-
-### 중앙값
-num=sorted(num)
-idx=len(num)//2
-print(num[idx])
-
-
-### 최빈값
-count=Counter(num)
-count=count.most_common()
-most=count[0][1]
-
-mode_list=[]
-for i in count:
-    if i[1] == most:
-        mode_list.append(i[0])
-
-sort_most=sorted(mode_list)
-if len(sort_most) != 1:
-    print(sort_most[1])
-else:
-    print(sort_most[0])
-
-### 범위
-print(max(num)-min(num))
+# # 통계학
+# from collections import Counter
+# import sys
+#
+# N = int(input())
+# num = [int(sys.stdin.readline()) for _ in range(N)]
+#
+# ### 평균
+# print(round(sum(num)/len(num)))
+#
+# ### 중앙값
+# num=sorted(num)
+# idx=len(num)//2
+# print(num[idx])
+#
+#
+# ### 최빈값
+# count=Counter(num)
+# count=count.most_common()
+# most=count[0][1]
+#
+# mode_list=[]
+# for i in count:
+#     if i[1] == most:
+#         mode_list.append(i[0])
+#
+# sort_most=sorted(mode_list)
+# if len(sort_most) != 1:
+#     print(sort_most[1])
+# else:
+#     print(sort_most[0])
+#
+# ### 범위
+# print(max(num)-min(num))
 
 
 
