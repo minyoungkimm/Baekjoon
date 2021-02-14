@@ -203,7 +203,7 @@ dy=[1,0,-1,0]
 for i in range(N):
     for j in range(M):
         if box[i][j]==1:
-            de.append((i,j))
+            de.append([i,j])
 
 while de:
     x, y = de.popleft()
@@ -212,7 +212,7 @@ while de:
         ny=y+dy[k]
         if 0<=nx<N and 0<=ny<M:
             if box[nx][ny]==0:
-                de.append((nx,ny))
+                de.append([nx,ny])
                 box[nx][ny]=box[x][y]+1
 
 day=-1
@@ -232,5 +232,121 @@ for i in range(N):
 # print(box)
 if breaker == 0:
     print(day-1)
+
+
+
+# 토마토 (3차원)
+import sys
+from collections import deque
+
+M, N, H = map(int,sys.stdin.readline().split())
+box=[[list(map(int,sys.stdin.readline().split())) for _ in range(N)] for _ in range(H)]
+c=[[[0]*M for _ in range(N)]for _ in range(H)]
+de=deque()
+
+
+dx=[0,1,0,-1,0,0]
+dy=[1,0,-1,0,0,0]
+dz=[0,0,0,0,1,-1]
+
+for i in range(H):
+    for j in range(N):
+        for k in range(M):
+            if box[i][j][k] == 1 and c[i][j][k] == 0:
+                de.append([i,j,k])
+                c[i][j][k] = 1
+
+
+def bfs():
+    while de:
+        z, y, x = de.popleft()
+        for i in range(6):
+            nz = z + dz[i]
+            ny = y + dy[i]
+            nx = x + dx[i]
+            if 0 <= nz < H and 0 <= ny < N and 0 <= nx < M:
+                if box[nz][ny][nx] == 0 and c[nz][ny][nx] == 0:
+                    de.append([nz, ny, nx])
+                    box[nz][ny][nx] = 1
+                    c[nz][ny][nx] = c[z][y][x] + 1
+
+
+bfs()
+
+for i in box:
+    for j in i:
+        if 0 in j:
+            print(-1)
+            sys.exit()
+
+day = 0
+for i in c:
+    for j in i:
+        max_day = max(j)
+        day = max(day,max_day)
+
+print(day-1)
+
+
+# 숨바꼭질
+N, K = map(int,input().split())
+
+d=[0 for _ in range(100001)]
+max_d = 100000
+
+from collections import deque
+
+def bfs(n):
+    de=deque()
+    de.append(n)
+    d[n] = 1
+    while de:
+        l=de.popleft()
+        if l + 1 <= max_d and d[l+1] == 0:
+            de.append(l+1)
+            d[l+1] = d[l] + 1
+        if l - 1 >= 0 and d[l-1] == 0:
+            de.append(l-1)
+            d[l-1] = d[l] + 1
+        if l * 2 <= max_d and d[l * 2] == 0:
+            de.append(l*2)
+            d[l*2] = d[l] + 1
+
+bfs(N)
+print(d[K]-1)
+
+
+# 벽 부수고 이동하기
+from collections import deque
+
+N, M = map(int,input().split())
+m = [list(map(int,input())) for _ in range(N)]
+c = [[[0]*2 for _ in range(M)] for _ in range(N)]
+de=deque()
+
+dx=[0,1,0,-1]
+dy=[1,0,-1,0]
+
+def bfs():
+    de.append([0,0,1])
+    c[0][0][1] = 1
+    while de:
+        x, y, z = de.popleft()
+        if x == N -1 and y == M -1:
+            return c[x][y][z]
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < N and 0 <= ny < M:
+                if m[nx][ny] == 1 and z == 1:
+                    c[nx][ny][0] = c[nx][ny][1] + 1
+                    de.append([nx,ny,0])
+                elif m[nx][ny] == 0 and c[nx][ny][z] == 0:
+                    c[nx][ny][z] = c[x][y][z] + 1
+                    de.append([nx,nx,z])
+    return -1
+
+print(bfs())
+
 
 
