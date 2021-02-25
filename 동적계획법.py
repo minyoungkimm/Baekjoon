@@ -44,6 +44,21 @@ while True:
 
 
 
+# 01타일
+import sys
+N = int(sys.stdin.readline())
+
+first = 1
+second = 2
+tmp = 0
+for _ in range(N-1):
+    tmp=first
+    first=second
+    second=(tmp+first)%15746
+print(first)
+
+
+
 
 
 
