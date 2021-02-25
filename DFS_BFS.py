@@ -319,11 +319,6 @@ print(d[K]-1)
 # 벽 부수고 이동하기
 from collections import deque
 
-N, M = map(int,input().split())
-m = [list(map(int,input())) for _ in range(N)]
-c = [[[0]*2 for _ in range(M)] for _ in range(N)]
-de=deque()
-
 dx=[0,1,0,-1]
 dy=[1,0,-1,0]
 
@@ -332,21 +327,114 @@ def bfs():
     c[0][0][1] = 1
     while de:
         x, y, z = de.popleft()
-        if x == N -1 and y == M -1:
+        if x == N - 1 and y == M - 1:
             return c[x][y][z]
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
             if 0 <= nx < N and 0 <= ny < M:
                 if m[nx][ny] == 1 and z == 1:
-                    c[nx][ny][0] = c[nx][ny][1] + 1
+                    c[nx][ny][0] = c[x][y][1] + 1
                     de.append([nx,ny,0])
                 elif m[nx][ny] == 0 and c[nx][ny][z] == 0:
                     c[nx][ny][z] = c[x][y][z] + 1
-                    de.append([nx,nx,z])
+                    de.append([nx,ny,z])
     return -1
 
+N, M = map(int,input().split())
+m = [list(map(int,input())) for _ in range(N)]
+c = [[[0]*2 for _ in range(M)] for _ in range(N)]
+de=deque()
+
 print(bfs())
+
+
+
+
+
+# 나이트의 이동
+from collections import deque
+
+dx = [1,2,2,1,-1,-2,-2,-1]
+dy = [2,1,-1,-2,-2,-1,1,2]
+
+
+def bfs(sx,sy,tx,ty):
+    de = deque()
+    de.append([sx,sy])
+    visit[sx][sy] = 1
+    while de:
+        x,y = de.popleft()
+        if x == tx and y == ty:
+            print(visit[tx][ty]-1)
+            return
+        for i in range(8):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < l and 0 <= ny < l:
+                if visit[nx][ny] == 0:
+                    de.append([nx,ny])
+                    visit[nx][ny] = visit[x][y] + 1
+
+
+
+T = int(input())
+for _ in range(T):
+    l = int(input())
+    sx,sy = map(int,input().split())
+    tx,ty = map(int,input().split())
+    visit=[[0]*l for _ in range(l)]
+    bfs(sx,sy,tx,ty)
+
+
+# 이분 그래프
+import sys
+from collections import deque
+
+
+def bfs(x):
+    visit[x] = 1
+    q = deque()
+    q.append(x)
+    while q:
+        a = q.popleft()
+        for i in de[a]:
+            if visit[i]==0:
+                visit[i] = -visit[a]
+                q.append(i)
+            else:
+                if visit[i] == visit[a]:
+                    return False
+    return True
+
+
+K = int(input())
+for i in range(K):
+    V, E = map(int, sys.stdin.readline().split())
+    de = [[] for _ in range(V+1)]
+    visit = [0]*(V+1)
+    flag=1
+    for _ in range(E):
+        a, b = map(int, sys.stdin.readline().split())
+        de[a].append(b)
+        de[b].append(a)
+    for i in range(1, V+1):
+        if visit[i] == 0:
+            if not bfs(i):
+                flag = -1
+                break
+    print('YES' if flag == 1 else 'NO')
+
+
+
+
+
+
+
+
+
+
+
 
 
 
