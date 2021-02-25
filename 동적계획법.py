@@ -60,9 +60,18 @@ print(first)
 
 
 
+# 파도반 수열
+T = int(input())
 
+for _ in range(T):
+    n = int(input())
+    seq=[1,1,1,2,2]
 
+    if n > 5:
+        for i in range(5,n):
+            seq.append(seq[i-1] + seq[i-5])
 
+    print(seq[n-1])
 
 
 
