@@ -44,6 +44,7 @@ while True:
 
 
 
+
 # 01타일
 import sys
 N = int(sys.stdin.readline())
@@ -77,6 +78,28 @@ for _ in range(T):
 
 
 
+# RGB거리
+N = int(input())  # 집의 수
+cost=[]
+for _ in range(N):
+    cost.append(list(map(int,input().split())))
+
+for i in range(1,len(cost)):
+    cost[i][0] = min(cost[i-1][1], cost[i-1][2]) + cost[i][0]
+    cost[i][1] = min(cost[i-1][0], cost[i-1][2]) + cost[i][1]
+    cost[i][2] = min(cost[i-1][0], cost[i-1][1]) + cost[i][2]
+
+print(min(cost[N-1]))
+
+
+
+# 정수 삼각형
+n = int(input())
+num=[]
+for _ in range(n):
+    num.append(list(map(int,input().split())))
+
+print(num)
 
 
 
