@@ -217,3 +217,29 @@ for i in range(2, n + 1):
             dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j + 1]
 print(sum(dp[n]) % 1000000000)
 
+
+
+# 포도주 시식 (2156번)
+n=int(input())
+quan=[0]
+for i in range(n):
+    quan.append(int(input()))
+
+dp=[0 for _ in range(n+1)]
+dp[1]=quan[1]
+
+for i in range(2,n+1):
+    if i==2:
+        dp[i]=quan[1]+quan[2]
+    else:
+        dp[i]=max(dp[i-1],dp[i-3]+quan[i-1]+quan[i],dp[i-2]+quan[i])
+
+print(dp[-1])
+
+
+
+
+
+
+
+
