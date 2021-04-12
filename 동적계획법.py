@@ -237,9 +237,18 @@ for i in range(2,n+1):
 print(dp[-1])
 
 
+# 가장 긴 증가하는 부분 수열 (11053번)
+n= int(input())
+A=list(map(int,input().split()))
 
+dp=[0] * n
 
+for i in range(n):
+    for j in range(i):
+        if A[i] > A[j] and dp[i] < dp[j]:
+            dp[i]=dp[j]
+    dp[i]+=1
 
-
+print(max(dp))
 
 
