@@ -252,3 +252,29 @@ for i in range(n):
 print(max(dp))
 
 
+
+
+# 가장 긴 바이토닉 부분 수열 (11054번)
+n = int(input())
+num=list(map(int,input().split()))
+incre=[1] * n
+decre=[1] * n
+result=[]
+
+for i in range(n):
+    for j in range(i):
+        if num[i] > num[j] and incre[i] < incre[j] + 1:
+            incre[i] = incre[j] + 1
+
+for i in range(n-1,-1,-1):
+    for j in range(i+1,n):
+        if num[i] > num[j] and decre[i] < decre[j] + 1:
+            decre[i] = decre[j] + 1
+
+for i in range(n):
+    result.append(incre[i] + decre[i]-1)
+
+print(max(result))
+
+
+
