@@ -317,6 +317,7 @@ for i in range(len(a)):
 
 print(len(lst))
 
+# 정답
 import sys
 a = sys.stdin.readline().strip().upper()
 b = sys.stdin.readline().strip().upper()
@@ -332,6 +333,7 @@ for i in range(1, len(a) + 1):
 print(dp[-1][-1])
 
 
+
 # 연속합 (1912번)
 n = int(input())
 num=list(map(int,input().split()))
@@ -342,6 +344,7 @@ for i in range(len(num)-1):
     sum_list.append(max(sum_list[i]+num[i+1], num[i+1]))
 
 print(max(sum_list))
+
 
 
 # 평범한 배낭 (12865번)
