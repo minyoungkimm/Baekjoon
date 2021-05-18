@@ -303,6 +303,63 @@ print(n-max(dp))
 
 
 
+# LCS (9251번)
+# 초기버전 (틀림)
+a=input()
+b=input()
+
+lst=[]
+for i in range(len(a)):
+    idx = b.find(a[i])
+    if idx != -1:
+        lst.append(a[i])
+        b=b[idx+1:]
+
+print(len(lst))
+
+import sys
+a = sys.stdin.readline().strip().upper()
+b = sys.stdin.readline().strip().upper()
+dp = [[0] * (len(b)+1) for _ in range(len(a)+1)]
+
+for i in range(1, len(a) + 1):
+    for j in range(1, len(b) + 1):
+        if a[i-1] == b[j-1]:
+            dp[i][j] = dp[i-1][j-1] + 1
+        else :
+            dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+
+print(dp[-1][-1])
+
+
+# 연속합 (1912번)
+n = int(input())
+num=list(map(int,input().split()))
+sum_list=[num[0]]
+
+
+for i in range(len(num)-1):
+    sum_list.append(max(sum_list[i]+num[i+1], num[i+1]))
+
+print(max(sum_list))
+
+
+# 평범한 배낭 (12865번)
+import sys
+
+r = sys.stdin.readline
+N, K = map(int, r().split())
+bag = [tuple(map(int, r().split())) for _ in range(N)]
+
+knap = [0 for _ in range(K+1)]
+
+for i in range(N):
+    for j in range(K,1,-1):
+        if bag[i][0] <= j:
+            knap[j] = max(knap[j], knap[j-bag[i][0]] + bag[i][1])
+
+
+print(knap[-1])
 
 
 
