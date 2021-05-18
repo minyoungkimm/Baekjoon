@@ -360,6 +360,3 @@ for i in range(N):
 
 
 print(knap[-1])
-
-
-
