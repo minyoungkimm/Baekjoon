@@ -50,21 +50,21 @@ solve(0,N,M)
 
 
 # N과 M(2)_ver.2 (15650번)
-N, M = map(int,input().split())
-
-tmp = []
-answer = []
-def recur():
-    if len(tmp) == M:
-        print(' '.join(map(str,tmp)))
-        return
-    for i in range(1, N+1):
-        if i not in tmp and (len(tmp) == 0 or i > tmp[-1]):
-            tmp.append(i)
-            recur()
-            tmp.pop()
-
-recur()
+# N, M = map(int,input().split())
+#
+# tmp = []
+# answer = []
+# def recur():
+#     if len(tmp) == M:
+#         print(' '.join(map(str,tmp)))
+#         return
+#     for i in range(1, N+1):
+#         if i not in tmp and (len(tmp) == 0 or i > tmp[-1]):
+#             tmp.append(i)
+#             recur()
+#             tmp.pop()
+#
+# recur()
 
 
 # N과 M(3) (15651번)
@@ -86,13 +86,13 @@ recur()
 
 
 # N과 M(3)_ver.2 (15651번)
-from itertools import product
-
-N, M = map(int, input().split())
-p1 = list(map(str,range(1,N+1)))
-
-for pro in list(product(p1, repeat=M)):
-    print(' '.join(pro))
+# from itertools import product
+#
+# N, M = map(int, input().split())
+# p1 = list(map(str,range(1,N+1)))
+#
+# for pro in list(product(p1, repeat=M)):
+#     print(' '.join(pro))
 
 
 # N과 M(4) (15652번)
