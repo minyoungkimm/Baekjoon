@@ -114,3 +114,96 @@ def recur():
 recur()
 
 
+
+# N-Queen (9663번)
+# 크기가 N x N인 체스판 위에 퀸 N개를 서로 공격할 수 없게 놓는 문제
+# N이 주어졌을 때, 퀸을 놓는 방법의 수를 구하는 프로그램 작성
+#
+# 스도쿠 (2580번)
+import sys
+sudoku = [list(map(int,sys.stdin.readline().split())) for _ in range(9)]
+emptyspace = [(i,j) for i in range(9) for j in range(9) if sudoku[i][j] == 0]
+
+def candidating(y,x):
+    numbers = [i + 1 for i in range(9)]
+    # 행/열 검사
+    for k in range(9):
+        if sudoku[y][k] in numbers:
+            numbers.remove(sudoku[y][k])
+        if sudoku[k][x] in numbers:
+            numbers.remove(sudoku[k][x])
+    # 3 x 3 검사
+    y = y//3
+    x = x//3
+    for i in range(y*3, (y+1)*3):
+        for j in range(x*3, (x+1)*3):
+            if sudoku[i][j] in numbers:
+                numbers.remove(sudoku[i][j])
+    return numbers
+
+def dfs(count):
+    if count == len(emptyspace):
+        for row in sudoku:
+            print(*row)
+        return
+    (i,j) = emptyspace[count]
+    candi = candidating(i,j)
+    for num in candi:
+        sudoku[i][j] = num
+        dfs(count+1)
+        sudoku[i][j] = 0
+
+dfs(0)
+#
+# import sys
+#
+# sdk = [list(map(int, sys.stdin.readline().split())) for _ in range(9)]
+# zeros = [(i, j) for i in range(9) for j in range(9) if sdk[i][j] == 0]
+#
+#
+# def sudoku(index):
+#     # 한 바퀴에서 모든 경우를 다 보았으면 출력
+#     if index == len(zeros):  # 더이상 넣을곳이 없어지면
+#         for row in sdk:
+#             print(*row)
+#         sys.exit(0)  # 하나이상 있을시 하나만 출력
+#
+#     x = zeros[index][0]  # 넣을곳의 x좌표
+#     y = zeros[index][1]  # 넣을곳의 y좌표
+#     dx = (x // 3) * 3
+#     dy = (y // 3) * 3
+#
+#     # 사용할 수 있는 숫자 9개 0은 못쓰기때문에 처음부터 false로 둔다.
+#     num_list = [0] + [1 for _ in range(9)]
+#     ## 가로세로 박스를 검사해 넣을수 있는숫자만 true로 남긴다.
+#     for j in range(9):
+#         # 가로 검사
+#         if (sdk[x][j]):  # 가로의 숫자 체크 불가능한 숫자 모두 num list에서 false로 만들어줌
+#             num_list[sdk[x][j]] = 0
+#             # 세로 검사
+#         if (sdk[j][y]):  # 세로의 숫자 체크
+#             num_list[sdk[j][y]] = 0
+#
+#         # 3*3 box 검사
+#     for i in range(dx, dx + 3):
+#         for j in range(dy, dy + 3):
+#             check_num = sdk[i][j]
+#             if (check_num):
+#                 num_list[check_num] = 0
+#
+#         # 현재 가능한 수(후보숫자)만 가져옴
+#         # 가능한 수를 가져왔으면, 이전에 다뤄왔던 백트래킹을 사용하면 됨
+#     candidate_list = []
+#     for i in range(len(num_list)):
+#         if num_list[i] == 1:
+#             candidate_list.append(i)
+#
+#     # 후보숫자 하나씩 넣어봄
+#     for num in candidate_list:
+#         sdk[x][y] = num
+#         sudoku(index + 1)  # 다음 칸
+#         sdk[x][y] = 0
+#
+#
+# sudoku(0)
+#
