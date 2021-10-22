@@ -81,7 +81,60 @@ while start <= end:
     else:
         end = mid - 1
 
+print(end)
 
+
+
+# 나무 자르기 (2805번)
+N, M = map(int, input().split())
+tree_list = list(map(int, input().split()))
+
+start = 1
+end = max(tree_list)
+
+while start <= end:
+    mid = (start + end) // 2
+    tree = 0
+    for i in tree_list:
+        if i >= mid:
+            tree += i - mid
+
+    if tree >= M:
+        start = mid + 1
+    else:
+        end = mid - 1
 
 print(end)
+
+
+
+# 공유기 설치 (2110번)
+N, C = map(int,input().split())
+
+house = sorted(list(int(input()) for _ in range(N)))
+
+start = 1
+end = house[-1] - house[0]
+distance = 0
+
+while start <= end:
+    mid = (start + end) // 2
+    old = house[0]
+    cnt = 1
+
+    for i in range(1, len(house)):
+        if house[i]  >= old + mid:
+            cnt += 1
+            old = house[i]
+
+    if cnt >= C:
+        start = mid + 1
+        distance = mid
+    else:
+        end = mid + 1
+
+print(distance)
+
+
+
 
