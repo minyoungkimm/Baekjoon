@@ -123,7 +123,7 @@ while start <= end:
     cnt = 1
 
     for i in range(1, len(house)):
-        if house[i]  >= old + mid:
+        if house[i] >= old + mid:
             cnt += 1
             old = house[i]
 
@@ -131,9 +131,75 @@ while start <= end:
         start = mid + 1
         distance = mid
     else:
-        end = mid + 1
+        end = mid - 1
 
 print(distance)
+
+
+# K번째 수 (1300번)
+N = int(input())
+K = int(input())
+
+start = 1
+end = K
+answer = 0
+
+while start <= end:
+    mid = (start+end)//2
+    count = 0
+    for i in range(1,N+1):
+        count += min(mid//i,N)
+
+    if count < K:
+        start = mid + 1
+    else:
+        answer = mid
+        end = mid - 1
+
+print(answer)
+
+
+
+#가장 긴 증가하는 부분수열 (12015번)
+import sys
+
+n = int(sys.stdin.readline())
+A = list(map(int, sys.stdin.readline().split()))
+dp = [0]
+
+for i in range(n):
+    low = 0                # 시작 위치
+    high = len(dp) - 1     # 끝 위치
+    while low <= high:
+        mid = (low+high)//2
+        if dp[mid] < A[i]:
+            low = mid + 1
+        else:
+            high = mid - 1
+    if low >= len(dp):
+        dp.append(A[i])
+    else:
+        dp[low] = A[i]
+
+print(len(dp)-1)
+
+### bisect 이용
+import sys
+from bisect import bisect_left
+input = sys.stdin.readline
+
+n = int(input())
+A = list(map(int, input().rsplit()))
+dp = []
+
+for i in A:
+    k = bisect_left(dp, i)
+    if len(dp) <= k:
+        dp.append(i)
+    else:
+        dp[k] = i
+
+print(len(dp))
 
 
 
